@@ -58,8 +58,7 @@ ISR(TIMER0_OVF_vect) {
 	// 외부로 노출되는 전역 변수에 ISR에서 수정한 누적(경과) 시간 값을 반영해준다.
 	timer0_millis = m;
 	timer0_micros = f;
-	DDRB |= (1<<PB4);
-	PINB|=(1<<PB4);
+
 }
 
 unsigned long millis() {
