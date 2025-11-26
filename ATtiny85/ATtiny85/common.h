@@ -15,6 +15,8 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include "timer0.h"
+#include "adc.h"
+#include "button.h"
 
 
 
