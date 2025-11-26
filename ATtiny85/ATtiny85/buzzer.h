@@ -19,6 +19,8 @@ void buzzer_init(void);
 void buzzer_on(uint8_t duty);
 
 void buzzer_off(void);
+void buzzer_work(void);
+void set_buzzer_duration(void);
 
 void buzzer_beep_toggle_periodic(uint16_t period_ms, uint8_t duty);
 
