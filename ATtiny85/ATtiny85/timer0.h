@@ -13,7 +13,7 @@
 // 1 마이크로초당 클럭 주기 수
 #define CLOCKS_PER_MICRO ( F_CPU / 1000000UL )
 
-#define PRESCALE_VALUE_TIMER0 64UL
+#define PRESCALE_VALUE_TIMER0 8UL
 #define TIMER0_SIZE    256UL
 
 // 클럭수를 마이크로초로 변환 (32비트로 강제)

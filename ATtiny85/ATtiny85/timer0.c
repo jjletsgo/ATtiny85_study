@@ -18,7 +18,7 @@ t=(1+OCR0)*N/Fcpu
 */
 
 
-void init_timer0_FAST_PWM_mode_OVF() { //Timer0-------------->OC0B에 PWM출력. 분주비 64, ovf활성화
+void init_timer0_FAST_PWM_mode_OVF() { //Timer0-------------->OC0B에 PWM출력. 분주비 8, ovf활성화
 	TCCR0A|=(1<< COM0B1) | (1<< WGM01) | (1<< WGM00);
 	/*
 	Clear OC0A/OC0B on Compare Match, set OC0A/OC0B at BOTTOM
@@ -30,10 +30,10 @@ void init_timer0_FAST_PWM_mode_OVF() { //Timer0-------------->OC0B에 PWM출력.
 	FastPWM모드에선 TOP이 0xFF이고 오버플로 인터럽트 플래그가 0XFF에서 발생
 	
 	*/
-	TCCR0B |= (1<< CS01) | (1<<CS00); // set prescaler value to 32 -> io 클럭을 32로 분주해서 사용
-	OCR0B = OCR0B_VAL_FOR_8_BIT_FAST_PWM;
+	TCCR0B |= (1<< CS01); // set prescaler value to 8 -> io 클럭을 8로 분주해서 사용
+	OCR0B = 0;
 	TIMSK |= (1<<TOIE0); //Timer/Counter0 Overflow Interrupt Enable
-	DDRB |= (1<<PB1);
+	DDRB |= (1<<PB1); //PWM OUTPUT ENABLE
 	sei();
 }
 
@@ -79,7 +79,7 @@ uint16_t secs() {
 	return (uint16_t)(millis()/1000);
 }
 
-//인자로 타이머의 주소와 , ms 단위의 딜레이 간격을 주시면됩니다. 딜레이는 0~255ms 까지 가능합니다
+//To. 민규씨, 상민씨. 인자로 타이머의 주소와 , ms 단위의 딜레이 간격을 주시면됩니다. 딜레이는 16비트 숫자 전부 가능합니다!
 uint8_t timer_delay_ms(timer_ms *timer, uint16_t delay_ms)
 {
 	unsigned long now = millis();   // 한번만 읽어두고 재사용
